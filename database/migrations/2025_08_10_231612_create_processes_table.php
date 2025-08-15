@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('processes', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 150);
+            $table->unsignedBigInteger('org_id')->nullable();
+            $table->integer('creator_id')->nullable();
+            $table->string('description', 500)->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('metric_id')->nullable();
+            $table->integer('length')->nullable();
             $table->timestamps();
         });
     }
