@@ -20,6 +20,8 @@ class UserInfolist
                     ->dateTime(),
                 TextEntry::make('updated_at')
                     ->dateTime(),
+                TextEntry::make('org_id')
+                    ->numeric(),
             ]);
     }
 }

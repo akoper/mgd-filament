@@ -22,6 +22,9 @@ class UserForm
                 TextInput::make('password')
                     ->password()
                     ->required(),
+                TextInput::make('org_id')
+                    ->numeric()
+                    ->default(null),
             ]);
     }
 }

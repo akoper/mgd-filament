@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Causes\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class CauseForm
@@ -10,7 +11,8 @@ class CauseForm
     {
         return $schema
             ->components([
-                //
+                TextInput::make('name')
+                    ->required(),
             ]);
     }
 }

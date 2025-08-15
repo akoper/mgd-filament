@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Cities\Schemas;
 
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class CityForm
@@ -10,7 +11,8 @@ class CityForm
     {
         return $schema
             ->components([
-                //
+                TextInput::make('name')
+                    ->required(),
             ]);
     }
 }

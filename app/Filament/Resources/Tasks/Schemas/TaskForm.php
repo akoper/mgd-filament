@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Tasks\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -29,8 +28,8 @@ class TaskForm
                 TextInput::make('creator_id')
                     ->numeric()
                     ->default(null),
-                Select::make('project_id')
-                    ->relationship('project', 'name')
+                TextInput::make('project_id')
+                    ->numeric()
                     ->default(null),
                 TextInput::make('org_id')
                     ->numeric()

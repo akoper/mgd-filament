@@ -31,6 +31,9 @@ class UsersTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('org_id')
+                    ->numeric()
+                    ->sortable(),
             ])
             ->filters([
                 //
