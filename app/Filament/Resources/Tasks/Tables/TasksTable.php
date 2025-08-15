@@ -5,9 +5,8 @@ namespace App\Filament\Resources\Tasks\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class TasksTable
@@ -16,26 +15,61 @@ class TasksTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('created_date')
+                    ->dateTime()
                     ->sortable(),
-                TextColumn::make('title')
-                    ->searchable()
+                TextColumn::make('start_date')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('end_date')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('closed_date')
+                    ->dateTime()
+                    ->sortable(),
+                TextColumn::make('recipient_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('creator_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('project_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('org_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('metric_id')
+                    ->numeric()
                     ->sortable(),
                 TextColumn::make('status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'pending' => 'gray',
-                        'in_progress' => 'warning',
-                        'completed' => 'success',
-                        default => 'gray',
-                    })
+                    ->searchable(),
+                TextColumn::make('public')
+                    ->searchable(),
+                TextColumn::make('street')
+                    ->searchable(),
+                TextColumn::make('location_id')
+                    ->numeric()
                     ->sortable(),
-                TextColumn::make('due_date')
-                    ->date()
+                TextColumn::make('city_id')
+                    ->numeric()
                     ->sortable(),
-                TextColumn::make('user.name')
-                    ->label('Assigned To')
-                    ->searchable()
+                TextColumn::make('state_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('country_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('latitude')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('longitude')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('cause_id')
+                    ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -47,19 +81,10 @@ class TasksTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'in_progress' => 'In Progress',
-                        'completed' => 'Completed',
-                    ]),
-                SelectFilter::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label('Assigned To')
-                    ->searchable()
-                    ->preload(),
+                //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

@@ -13,11 +13,27 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
-            $table->date('due_date')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->dateTime('created_date')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->dateTime('closed_date')->nullable();
+            $table->integer('recipient_id')->nullable();
+            $table->integer('creator_id')->nullable();
+            $table->integer('project_id')->nullable();
+            $table->integer('org_id')->nullable();
+            $table->integer('metric_id')->nullable();
+            $table->string('status')->nullable();
+            $table->string('public')->nullable();
+            $table->string('street', 60)->nullable();
+            $table->integer('location_id')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->integer('state_id')->nullable();
+            $table->integer('country_id')->nullable();
+            $table->float('latitude', 19, 14)->nullable();
+            $table->float('longitude', 19, 14)->nullable();
+            $table->smallInteger('cause_id')->nullable();
             $table->timestamps();
         });
     }

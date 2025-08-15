@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\Tasks\Schemas;
 
-use App\Models\User;
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
 class TaskForm
@@ -15,33 +14,57 @@ class TaskForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-
+                TextInput::make('name')
+                    ->required(),
                 Textarea::make('description')
-                    ->nullable()
-                    ->maxLength(65535)
+                    ->default(null)
                     ->columnSpanFull(),
-
-                Select::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'in_progress' => 'In Progress',
-                        'completed' => 'Completed',
-                    ])
-                    ->required()
-                    ->default('pending'),
-
-                DatePicker::make('due_date')
-                    ->nullable(),
-
-                Select::make('user_id')
-                    ->label('Assigned To')
-                    ->relationship('user', 'name')
-                    ->nullable()
-                    ->searchable()
-                    ->preload(),
+                DateTimePicker::make('created_date'),
+                DateTimePicker::make('start_date'),
+                DateTimePicker::make('end_date'),
+                DateTimePicker::make('closed_date'),
+                TextInput::make('recipient_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('creator_id')
+                    ->numeric()
+                    ->default(null),
+                Select::make('project_id')
+                    ->relationship('project', 'name')
+                    ->default(null),
+                TextInput::make('org_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('metric_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('status')
+                    ->default(null),
+                TextInput::make('public')
+                    ->default(null),
+                TextInput::make('street')
+                    ->default(null),
+                TextInput::make('location_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('city_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('state_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('country_id')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('latitude')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('longitude')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('cause_id')
+                    ->numeric()
+                    ->default(null),
             ]);
     }
 }
